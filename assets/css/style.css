@@ -1,0 +1,291 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    font-size: 13px;
+    background-color: #fff;
+}
+
+a:link,
+a:visited,
+a:hover {
+    color: #34a6f8;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+#imgcanvas {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    max-height: 4020px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.title {
+    margin: 0 2em;
+    text-align: center;
+    height: 80px;
+    line-height: 80px;
+    font-family: Georgia, Arial, sans-serif;
+    overflow: hidden;
+}
+
+.calendar {
+    position: relative;
+    z-index: 1;
+    margin: 0 2em 2em;
+    /* padding: 2em; */
+    box-sizing: border-box;
+    box-shadow: 0 0 15px #ddd;
+    font-family: "Microsoft YaHei UI", Arial, sans-serif;
+    min-width: 323.27px;
+}
+
+.feature {
+    margin: 0 auto;
+    padding: 0 15px;
+    font-weight: 500;
+    overflow: hidden;
+}
+
+.demo {
+    position: relative;
+    z-index: 1;
+    /* margin: 1.5em 0em; */
+    margin-top: 0.05em;
+    margin-right: 0em;
+    margin-bottom: 1.05em;
+    height: 360px;
+    /* border-top: 1px solid #ddd; */
+    /* border-bottom: 1px solid #ddd; */
+    overflow: auto;
+}
+
+.demo-example {
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    width: 50%;
+    padding: 15px;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.copyright {
+    margin: 0 auto;
+    line-height: 150%;
+    text-align: center;
+    font-size: 14px;
+    padding: 0 0 1.5em;
+    overflow: hidden;
+}
+
+canvas {
+    display: block;
+    margin: 0 auto;
+    border: 1px solid red;
+}
+
+.canvasContainer {
+    margin: 0 auto;
+    width: 800px;
+}
+.snapscreenBtn {
+    background: red;
+    width: 68px;
+    text-align: center;
+    font-size: medium;
+    line-height: attr(font-size);
+}
+
+.absoluteRight {
+    position: absolute;
+    /* top: 18px; */
+    right: 0;
+    z-index: 1000;
+    background-color: transparent;
+    border-radius: calc(0.25rem - 1px);
+}
+
+.btn {
+    width: 100%;
+    width: 2rem;
+    height: 2rem;
+    background-color: #fff;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px 0 rgb(0 0 0 / 4%);
+    cursor: pointer;
+    text-align: center;
+    font-size: 1rem;
+}
+
+/* Add media queries for smaller screens */
+@media screen and (max-width: 720px) {
+    .demo-example {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .demo-example {
+        width: 100%;
+        overflow-x: scroll;
+    }
+}
+
+.noscroll body {
+    position: relative;
+}
+
+.username {
+    display: inline-block;
+    margin-left: 13px;
+    font-size: 28px;
+    color: black;
+    /* z-index: 1000; */
+}
+
+.cal-button-group {
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    margin-top: -1.25em;
+    padding-bottom: 1em;
+    display: flex;
+    /* flex-wrap: nowrap; */
+    align-items: stretch;
+    justify-content: space-evenly;
+}
+
+/* .cal-picked {
+    background-color: white;
+    color: black;
+    font-weight: normal;
+}
+
+.cal-picked:hover {
+    background-color: white;
+    color: black;
+} */
+
+.cal-current {
+    font-weight: bold;
+    text-decoration: underline;
+    text-underline-position: from-font;
+}
+
+.workHour-Do {
+    background-color: green !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+.workHour-Do:after {
+    content: "Do" !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+.workHour-All {
+    background-color: blue !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+.workHour-All:after {
+    content: "All" !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+.workHour-A {
+    background-color: orange !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+.workHour-A:after {
+    content: "A" !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+.workHour-B {
+    background-color: yellowgreen !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+.workHour-B:after {
+    content: "B" !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+.workHour-C {
+    background-color: blueviolet !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+.workHour-C:after {
+    content: "C" !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+.workHour-A4 {
+    background-color: brown !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+.workHour-A4:after {
+    content: "A4" !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+.workHour-A5 {
+    background-color: burlywood !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+.workHour-A5:after {
+    content: "A5" !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+.workHour-C4 {
+    background-color: goldenrod !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+.workHour-C4:after {
+    content: "C4" !important;
+    color: white !important;
+    font-weight: bold;
+}
+
+body {
+    min-width: 375px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
