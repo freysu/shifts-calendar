@@ -1,23 +1,14 @@
-* {
-    margin: 0;
-    padding: 0;
-}
-
-html,
 body {
-    font-size: 13px;
-    background-color: #fff;
+    width: 100%;
+    height: auto;
+    min-width: auto;
+    max-width: 1300px;
+    margin: 0 auto;
 }
 
-a:link,
-a:visited,
-a:hover {
-    color: #34a6f8;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
+.container {
+    position: relative;
+    width: ;
 }
 
 #imgcanvas {
@@ -39,14 +30,13 @@ a:hover {
 }
 
 .calendar {
-    position: relative;
     z-index: 1;
-    margin: 0 2em 2em;
+    margin: 1rem 1rem;
     /* padding: 2em; */
     box-sizing: border-box;
     box-shadow: 0 0 15px #ddd;
     font-family: "Microsoft YaHei UI", Arial, sans-serif;
-    min-width: 323.27px;
+    /* min-width: 323.27px; */
 }
 
 .feature {
@@ -57,7 +47,6 @@ a:hover {
 }
 
 .demo {
-    position: relative;
     z-index: 1;
     /* margin: 1.5em 0em; */
     margin-top: 0.05em;
@@ -71,9 +60,8 @@ a:hover {
 
 .demo-example {
     margin: 0 auto;
-    position: relative;
     z-index: 1;
-    width: 50%;
+    width: 100%;
     padding: 15px;
     height: 100%;
     box-sizing: border-box;
@@ -116,8 +104,11 @@ canvas {
     border-radius: calc(0.25rem - 1px);
 }
 
+.cal-button-col {
+    margin: 0 2.2rem;
+}
+
 .myBtn {
-    width: 100%;
     width: 2rem;
     height: 2rem;
     background-color: #fff;
@@ -131,20 +122,25 @@ canvas {
 }
 
 /* Add media queries for smaller screens */
-@media screen and (max-width: 720px) {
+@media screen and (min-width: 600px) {
     .demo-example {
         width: 100%;
     }
-}
-
-@media screen and (max-width: 375px) {
-    .demo-example {
-        width: 100%;
-        overflow-x: scroll;
+    .jconfirm {
+        left: -20% !important;
     }
 }
 
-.noscroll body {
+@media screen and (max-width: 800px) {
+    .demo-example {
+        width: 100%;
+    }
+    .jconfirm {
+        left: -20% !important;
+    }
+}
+
+.noscroll {
     position: relative;
 }
 
@@ -158,7 +154,6 @@ canvas {
 
 .cal-button-group {
     margin: 0 auto;
-    position: relative;
     z-index: 1;
     width: 100%;
     height: 100%;
@@ -282,12 +277,6 @@ canvas {
     content: "C4" !important;
     color: white !important;
     font-weight: bold;
-}
-
-body {
-    min-width: 375px;
-    max-width: 1300px;
-    margin: 0 auto;
 }
 
 .checkbox-text-switch input {

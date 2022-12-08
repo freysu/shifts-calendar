@@ -2,7 +2,7 @@
  * @Author: freysu
  * @Date: 2022-12-07 17:06:56
  * @LastEditors: freysu
- * @LastEditTime: 2022-12-08 12:26:49
+ * @LastEditTime: 2022-12-09 03:22:01
  * @Description: file content
 -->
 <!DOCTYPE html>
@@ -11,12 +11,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Shifts Calendar</title>
+  <!-- <link rel="stylesheet" href="./assets/css/reset.min.css"> -->
+  <link rel="stylesheet" href="./assets/css/bootstrap.css">
   <link rel="stylesheet" href="./assets/css/jquery-confirm.min.css">
   <link rel="stylesheet" href="./assets/css/calendar.css" />
   <link rel="stylesheet" href="./assets/css/style.css" />
-  <link href="./assets/css/bootstrap.css" rel="stylesheet" />
+  <link href="./assets/css/notie.css" rel="stylesheet" />
   <script src="https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-y/jquery/3.6.0/jquery.min.js"
     type="application/javascript"></script>
   <script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-y/html2canvas/1.4.1/html2canvas.min.js"
@@ -24,43 +26,48 @@
   <script src="https://jsd.cdn.zzko.cn/gh/jondavidjohn/hidpi-canvas-polyfill@master/dist/hidpi-canvas.min.js"
     type="application/javascript"></script>
   <script src="./assets/js/canvas2image.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+  <script src="./assets/js/jquery-confirm.min.js"></script>
+  <script src="./assets/js/notie.min.js"></script>
 </head>
 
 <body>
-  <div class="feature">
-    <h1 class="title">Calendar</h1>
-  </div>
-  <div class="calendar">
-    <div class="demo">
-      <div class="demo-example box" id="multiple-pick">
-      </div>
+  <div class="container">
+    <div class="feature">
+      <h1 class="title">Calendar</h1>
     </div>
-    <div class="cal-button-group">
-      <div class="cal-button-col">
-        <button class="myBtn w-All">All</button>
-        <button class="myBtn w-Do">Do</button>
-        <button class="myBtn w-A">A</button>
-        <button class="myBtn w-B">B</button>
-        <button class="myBtn w-C">C</button>
-        <button class="myBtn w-A4">A4</button>
-        <button class="myBtn w-A5">A5</button>
-        <button class="myBtn w-C4">C4</button>
+    <div class="calendar">
+      <div class="demo">
+        <div class="demo-example box" id="multiple-pick">
+        </div>
       </div>
+      <div class="cal-button-group">
+        <div class="cal-button-col">
+          <button class="myBtn w-All">All</button>
+          <button class="myBtn w-Do">Do</button>
+          <button class="myBtn w-A">A</button>
+          <button class="myBtn w-B">B</button>
+          <button class="myBtn w-C">C</button>
+          <button class="myBtn w-A4">A4</button>
+          <button class="myBtn w-A5">A5</button>
+          <button class="myBtn w-C4">C4</button>
+        </div>
 
-      <div class="cal-button-col">
-        <img class="myBtn snapscreenBtn" title="截图并保存" src="./assets/img/capture.svg" />
-        <img class="myBtn loginBtn" title="登录" alt="登录" src="./assets/img/login.svg" />
+        <div class="cal-button-col">
+          <img class="myBtn snapscreenBtn" title="截图并保存"
+            src="https://cdn.glitch.global/50c89dd9-1c8e-4942-882a-63ee3bfdbca9/capture.svg?v=1670475562396" />
+          <img class="myBtn loginBtn" title="登录" alt="登录"
+            src="https://cdn.glitch.global/50c89dd9-1c8e-4942-882a-63ee3bfdbca9/login.svg?v=1670475595102" />
+        </div>
       </div>
     </div>
-  </div>
-  <div class="copyright">
-    <p>
-      Copyright © 2022
-      <a href="https://github.com/freysu" title="Github主页">FreySu</a>
-      <br>
-      All <span class="sBtn" id="changeLang">right</span><span class="sBtn" id="extractStyle"> reserved.</span>
-    </p>
+    <div class="copyright">
+      <p>
+        Copyright © 2022
+        <a href="https://github.com/freysu" title="Github主页">FreySu</a>
+        <br>
+        All <span class="sBtn" id="changeLang">right</span><span class="sBtn" id="extractStyle"> reserved.</span>
+      </p>
+    </div>
   </div>
   <script src="./assets/js/calendar.js"></script>
   <script src="./assets/js/index.js"></script>

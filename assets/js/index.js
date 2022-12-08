@@ -8,22 +8,23 @@ jconfirm.defaults = {
   cancelButton: 'Close',
   confirmButtonClass: 'btn-default',
   cancelButtonClass: 'btn-default',
-  theme: 'material',
-  animation: 'zoom',
+  theme: 'light',
+  animation: 'none',
   closeAnimation: 'scale',
-  animationSpeed: 500,
-  animationBounce: 1.2,
+  animationSpeed: 400,
+  animationBounce: 1,
   keyboardEnabled: false,
   rtl: false,
   confirmKeys: [13], // ENTER key
   cancelKeys: [27], // ESC key
   container: 'body',
+  containerFluid: false,
   confirm: function () {},
   cancel: function () {},
-  backgroundDismiss: false,
+  backgroundDismiss: true,
   autoClose: false,
   closeIcon: null,
-  columnClass: 'col-md-4 col-md-offset-8 col-xs-4 col-xs-offset-8',
+  // columnClass: 'col-md-4 col-md-offset-8 col-xs-4 col-xs-offset-8',
   onOpen: function () {},
   onClose: function () {},
   onAction: function () {}
@@ -32,26 +33,27 @@ jconfirm.defaults = {
 const myToast = {
   /**
    * @description toast通知
-   * @param {string} type "success", "error", "warning", "info" or "question"
-   * @param {string} title 标题
-   * @param {number} timer 显示时间
-   * @param {string} content html类型内容，选填
+   * @param {string} type "success", "error", "warning", "info" or "neutral"
+   * @param {string} text 标题
+   * @param {number} time 显示时间
+   * @param {string} html html类型内容，选填
+   * @param {string} position 显示位置
    */
-  normal: function (type, content, timer, html = null) {
-    $.confirm({
-      title: type,
-      content,
-      autoClose: 'cancelAction|' + timer,
-      columnClass: 'small',
-      bgOpacity: 0,
-      animation: 'scale',
-      closeAnimation: 'scale',
-      animationSpeed: 400,
-      animationBounce: 1,
-      buttons: {
-        cancelAction: function () {}
-      }
-    })
+  normal: function (type, text, time, position = 'top', stay = false) {
+    try {
+      window.notie.alert({
+        type,
+        text,
+        position,
+        time:
+          Number(time) > 1000
+            ? Number(time / 1000).toFixed(2)
+            : Number(time).toFixed(2),
+        stay
+      })
+    } catch (e) {
+      console.error(e.message)
+    }
   }
 }
 
@@ -187,7 +189,8 @@ function formatDate(dateObj, formatType = 'yyyy-M-d') {
   })
 
   $('.loginBtn').click(() => {
-    if (localStorage.getItem('username').length) {
+    var curUserName = localStorage.getItem('username')
+    if (curUserName && curUserName.length) {
       var a = $.confirm({
         title: 'Are you sure?',
         content: `You won't be able to revert this!`,
@@ -207,22 +210,6 @@ function formatDate(dateObj, formatType = 'yyyy-M-d') {
           }
         }
       })
-
-      // Swal.fire({
-      //   title: 'Are you sure?',
-      //   text: "You won't be able to revert this!",
-      //   type: 'warning',
-      //   showCancelButton: true,
-      //   confirmButtonColor: '#3085d6',
-      //   cancelButtonColor: '#d33',
-      //   confirmButtonText: 'Yes, change it!'
-      // }).then((result) => {
-      //   if (result.value) {
-      //     localStorage.setItem('username', '')
-      //     document.querySelector('.username').innerText = '未登录'
-      //     openInputAlert()
-      //   }
-      // })
     } else {
       openInputAlert()
     }
@@ -238,11 +225,11 @@ function formatDate(dateObj, formatType = 'yyyy-M-d') {
             action: function () {
               var name = this.$content.find('.name').val()
               if (!name) {
-                $.alert('You need to write something!', 'Error!!')
+                myToast.normal('error', 'You need to write something!', 1500)
                 return false
               }
               if (!/^[A-Za-z]*(\s[A-Za-z]*)*$/.test(name.trim())) {
-                $.alert('Please Check it again!', 'Error!!')
+                myToast.normal('error', 'Please Check it again!', 1500)
                 return false
               }
               var curSaveUsername = name
@@ -250,9 +237,10 @@ function formatDate(dateObj, formatType = 'yyyy-M-d') {
               $('.username').text(curSaveUsername)
               bConfirm.close()
               bConfirm = null
-              $.alert(
-                `Submit Successfully！`,
-                `<h4>Hello, ${curSaveUsername}!</h4>`
+              myToast.normal(
+                'success',
+                `Submit Successfully！\n<h4>Hello, ${curSaveUsername}!</h4>`,
+                1500
               )
             }
           },
@@ -271,36 +259,6 @@ function formatDate(dateObj, formatType = 'yyyy-M-d') {
           })
         }
       })
-      // Swal.fire({
-      //   title: 'Please submit your name',
-      //   input: 'text',
-      //   inputAttributes: {
-      //     autocapitalize: 'off'
-      //   },
-      //   showCancelButton: true,
-      //   confirmButtonText: 'Look up',
-      //   showLoaderOnConfirm: true,
-      //   inputValidator: (value) => {
-      //     if (!value) {
-      //       return 'You need to write something!'
-      //     }
-      //     if (!/^[A-Za-z]*(\s[A-Za-z]*)*$/.test(value.trim())) {
-      //       return 'Please Check it again!'
-      //     }
-      //   },
-      //   allowOutsideClick: () => !Swal.isLoading()
-      // }).then((result) => {
-      //   if (result.value) {
-      //     var curSaveUsername = result.value
-      //     localStorage.setItem('username', curSaveUsername)
-      //     $('.username').text(curSaveUsername)
-      //     Swal.fire({
-      //       type: 'success',
-      //       title: `Login Successfully！`,
-      //       html: `<h4>Hello, ${curSaveUsername}!</h4>`
-      //     })
-      //   }
-      // })
     }
   })
 
@@ -308,7 +266,7 @@ function formatDate(dateObj, formatType = 'yyyy-M-d') {
     $('.w-' + String(key)).click(() => {
       for (const _key in actions) {
         if (_key === key) {
-          myToast.normal('success', `正在标记${_key}！`, 1500)
+          myToast.normal('info', `正在标记${_key}！`, 1500)
           actions[key] = true
         } else {
           actions[_key] = false
@@ -358,7 +316,13 @@ function formatDate(dateObj, formatType = 'yyyy-M-d') {
     return str.toLowerCase().replace(/( |^)[a-z]/g, (L) => L.toUpperCase())
   }
 
-  function captureCalendar(YourTargetElem, showElm) {
+  function sleep(duration) {
+    return new Promise((resolve) => {
+      setTimeout(resolve, duration)
+    })
+  }
+
+  async function captureCalendar(YourTargetElem, showElm) {
     var shareContent = document.getElementById(YourTargetElem)
     var width = shareContent.offsetWidth
     var height = shareContent.offsetHeight
@@ -370,105 +334,67 @@ function formatDate(dateObj, formatType = 'yyyy-M-d') {
     canvas.height = height
     canvas.getContext('2d').scale(scale, scale)
 
-    html2canvas(shareContent, {
+    myToast.normal('info', 'Sit back, we are processing your request!', 3000)
+    await sleep(3000)
+
+    var canvas1 = await html2canvas(shareContent, {
       allowTaint: true,
       useCORS: true,
       scale: scale,
       canvas: canvas,
       logging: false,
       width: width,
-      height: height
-    }).then(function (canvas) {
-      var img = convertCanvasToImage(canvas)
-      img.onload = function () {
-        img.onload = null
-        var displayObj = {
-          width: (width * scale) / (scale < 2 ? 1 : 2) + 'px',
-          height: (height * scale) / (scale < 2 ? 1 : 2) + 'px'
-        }
-        var aConfirm = $.confirm({
-          title: 'Screenshot preview',
-          content: `<div class="canvasContainer">
+      height: height,
+      backgroundColor: null
+    })
+    var img = convertCanvasToImage(canvas1)
+    img.onload = function () {
+      img.onload = null
+      var displayObj = {
+        width: (width * scale) / (scale < 2 ? 1 : 2) + 'px',
+        height: (height * scale) / (scale < 2 ? 1 : 2) + 'px'
+      }
+      var aConfirm = $.confirm({
+        title: 'Screenshot preview',
+        content: `<div class="canvasContainer">
             <div id="imgcanvas"><img src="${img.src}" style="opacity:1;z-index:9999;" alt="截图"/></div>
           </div>`,
-          columnClass: '',
-          buttons: {
-            saveBtn: {
-              text: 'Save',
-              btnClass: 'btn-blue',
-              keys: ['enter'],
-              action: function () {
-                download(
-                  img.src,
-                  titleCase(curUserName) + "'s available shifts.png"
-                )
-                aConfirm.close()
-                $.alert('Done!')
-              }
-            },
-            cancel: function () {
+        useBootstrap: true,
+        container: 'body',
+        buttons: {
+          saveBtn: {
+            text: 'Save',
+            btnClass: 'btn-blue',
+            keys: ['enter'],
+            action: function () {
+              download(
+                img.src,
+                titleCase(curUserName) + "'s available shifts.png"
+              )
               aConfirm.close()
+              myToast.normal('success', 'Done!', 1000)
             }
           },
-          onContentReady: function () {
-            // bind to events
-            var jc = this
-            const img = this.$content.find('#imgcanvas img')
-            const canvasContainer = this.$content.find('.canvasContainer')
-            img.css({
-              width: +canvas.width / scale / (scale < 2 ? 1 : 2) + 'px',
-              height: +canvas.height / scale / (scale < 2 ? 1 : 2) + 'px'
-            })
-            canvasContainer.css(displayObj)
+          cancel: function () {
+            aConfirm.close()
           }
-        })
-        // Swal.fire({
-        //   title: 'Screenshot preview ',
-        //   html: `<div class="canvasContainer">
-        //     <div id="imgcanvas"><img src="${img.src}" alt="截图"/></div>
-        //   </div>`,
-        //   showCancelButton: true,
-        //   confirmButtonText: 'Save',
-        //   cancelButtonText: 'Close',
-        //   allowEnterKey: true,
-        //   allowEscapeKey: true,
-        //   //   allowOutsideClick: true,
-        //   scrollbarPadding: false,
-        //   //   customClass: {
-        //   //     confirmButton: 'swal_btn',
-        //   //     cancelButton: 'swal_btn'
-        //   //   },
-        //   width: Number(displayObj.width.replace('px', '')) + 16.25 + 'px',
-        //   allowOutsideClick: () => {
-        //     !Swal.isLoading()
-        //     return false
-        //   },
-        //   onBeforeOpen: () => {
-        //     $('html').addClass('noscroll')
-        //     const content = Swal.getContent()
-        //     const _ = content.querySelector.bind(content)
-        //     const img = $(_('img'))
-        //     const canvasContainer = $(_('.canvasContainer'))
-        //     img.css({
-        //       width: +canvas.width / scale / (scale < 2 ? 1 : 2) + 'px',
-        //       height: +canvas.height / scale / (scale < 2 ? 1 : 2) + 'px'
-        //     })
-        //     canvasContainer.css(displayObj)
-        //   },
-        //   onClose: () => {
-        //     $('html').removeClass('noscroll')
-        //   }
-        // }).then((result) => {
-        //   if (result.value) {
-        //     console.log('yes')
-        //     download(
-        //       img.src,
-        //       titleCase(curUserName) + "'s available shifts.png"
-        //     )
-        //   }
-        // })
-      }
-    })
+        },
+        onContentReady: function () {
+          // bind to events
+          var jc = this
+          const img = this.$content.find('#imgcanvas img')
+          const canvasContainer = this.$content.find('.canvasContainer')
+          img.css({
+            width: +canvas1.width / scale / (scale < 2 ? 1 : 2) + 'px',
+            height: +canvas1.height / scale / (scale < 2 ? 1 : 2) + 'px'
+          })
+          canvasContainer.css(displayObj)
+          $(document).width() > 720
+            ? this.$body.css('width', '90%')
+            : this.$body.css('width', '70%')
+        }
+      })
+    }
   }
 
   // 绘制显示图片
