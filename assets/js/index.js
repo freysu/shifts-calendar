@@ -170,7 +170,11 @@ function formatDate(dateObj, formatType = 'yyyy-M-d') {
 
 ;(function start() {
   createCalendar(calendarConfig)
-  var curUserName = localStorage.getItem('username') || '未登录'
+  var curUserName = localStorage.getItem('username')
+  if (!curUserName && !/^[A-Za-z]*(\s[A-Za-z]*)*$/.test(curUserName.trim())) {
+    curUserName = 'XXX'
+    localStorage.setItem('username', 'XXX')
+  }
 
   $('.cal-title>.cal-text').after(
     `<span class="cal-text username">${curUserName}</span>`
