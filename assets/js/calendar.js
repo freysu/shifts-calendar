@@ -2358,8 +2358,8 @@ window.isI18N = false
               var $month = evt.delegateTarget
               var time = $month.getAttribute('data-month')
               this.pickMonth($month)
-              console.log('------------- _monthClick -------------')
-              console.log(time)
+              // console.log('------------- _monthClick -------------')
+              // console.log(time)
               return this
             }
             /**
@@ -2376,8 +2376,8 @@ window.isI18N = false
               var $el = evt.delegateTarget
               var time = $el.getAttribute('data-year')
               this.pickYear($el)
-              console.log('------------- _yearClick -------------')
-              console.log(time)
+              // console.log('------------- _yearClick -------------')
+              // console.log(time)
               return this
             }
             /**
@@ -2397,8 +2397,8 @@ window.isI18N = false
               this.pickDate(
                 elements.dates.querySelector('[data-date="' + time + '"]')
               )
-              console.log('------------- _todayClick -------------')
-              console.log(time)
+              // console.log('------------- _todayClick -------------')
+              // console.log(time)
               return this
             }
             /**

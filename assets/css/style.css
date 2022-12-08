@@ -116,7 +116,7 @@ canvas {
     border-radius: calc(0.25rem - 1px);
 }
 
-.btn {
+.myBtn {
     width: 100%;
     width: 2rem;
     height: 2rem;
@@ -288,4 +288,22 @@ body {
     min-width: 375px;
     max-width: 1300px;
     margin: 0 auto;
+}
+
+.checkbox-text-switch input {
+    font: inherit;
+    color: inherit;
+    background: var(--current-color);
+}
+
+.checkbox-text-switch {
+    cursor: pointer;
+}
+
+.checkbox-text-switch input {
+    display: none;
+}
+
+.sBtn:hover {
+    text-decoration: underline;
 }
