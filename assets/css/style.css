@@ -6,6 +6,17 @@ body {
     margin: 0 auto;
 }
 
+a:link,
+a:visited,
+a:hover {
+    color: initial;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
 .container {
     position: relative;
     width: ;
@@ -295,4 +306,9 @@ canvas {
 
 .sBtn:hover {
     text-decoration: underline;
+}
+
+.w-clear {
+    border-color: darkolivegreen;
+    color: darkolivegreen;
 }

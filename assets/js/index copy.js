@@ -1,99 +1,99 @@
 /* eslint-disable no-undef */
-// var timeFormat = 'HH:mm:ss'
+var timeFormat = 'HH:mm:ss'
 
-// function configureLogging(logs) {
-//   const colors = {
-//     error: 'red',
-//     warn: 'orange',
-//     info: 'blue',
-//     time: 'magenta',
-//     log: 'black',
-//     debug: 'green'
-//   }
-//   function log(level, messages) {
-//     const text = messages
-//       .map((message) => {
-//         return typeof message === 'object'
-//           ? JSON.stringify(message, null, 2)
-//           : message
-//       })
-//       .join(' ')
-//     const _level = level.toLowerCase()
-//     const fontColor = colors[_level]
-//     const textSpan = `<span style="color:${fontColor}">[${level}]: ${htmlEncode(
-//       text
-//     )}</span>`
-//     const _timestamp = htmlEncode(getNowFormatDate(new Date(), timeFormat))
-//     logs.innerHTML =
-//       `<span style="color:grey">[${_timestamp}]</span> ${textSpan}\n\n` +
-//       logs.innerHTML
-//   }
+function configureLogging(logs) {
+  const colors = {
+    error: 'red',
+    warn: 'orange',
+    info: 'blue',
+    time: 'magenta',
+    log: 'black',
+    debug: 'green'
+  }
+  function log(level, messages) {
+    const text = messages
+      .map((message) => {
+        return typeof message === 'object'
+          ? JSON.stringify(message, null, 2)
+          : message
+      })
+      .join(' ')
+    const _level = level.toLowerCase()
+    const fontColor = colors[_level]
+    const textSpan = `<span style="color:${fontColor}">[${level}]: ${htmlEncode(
+      text
+    )}</span>`
+    const _timestamp = htmlEncode(getNowFormatDate(new Date(), timeFormat))
+    logs.innerHTML =
+      `<span style="color:grey">[${_timestamp}]</span> ${textSpan}\n\n` +
+      logs.innerHTML
+  }
 
-//   console._error = console.error
-//   console.error = function (...rest) {
-//     log('ERROR', Array.prototype.slice.call(rest))
-//     console._error.apply(this, rest)
-//   }
+  console._error = console.error
+  console.error = function (...rest) {
+    log('ERROR', Array.prototype.slice.call(rest))
+    console._error.apply(this, rest)
+  }
 
-//   console._warn = console.warn
-//   console.warn = function (...rest) {
-//     log('WARN', Array.prototype.slice.call(rest))
-//     console._warn.apply(this, rest)
-//   }
+  console._warn = console.warn
+  console.warn = function (...rest) {
+    log('WARN', Array.prototype.slice.call(rest))
+    console._warn.apply(this, rest)
+  }
 
-//   console._log = console.log
-//   console.log = function (...rest) {
-//     log('LOG', Array.prototype.slice.call(rest))
-//     console._log.apply(this, rest)
-//   }
+  console._log = console.log
+  console.log = function (...rest) {
+    log('LOG', Array.prototype.slice.call(rest))
+    console._log.apply(this, rest)
+  }
 
-//   console._info = console.info
-//   console.info = function (...rest) {
-//     log('INFO', Array.prototype.slice.call(rest))
-//     console._info.apply(this, rest)
-//   }
+  console._info = console.info
+  console.info = function (...rest) {
+    log('INFO', Array.prototype.slice.call(rest))
+    console._info.apply(this, rest)
+  }
 
-//   console._debug = console.debug
-//   console.debug = function (...rest) {
-//     log('DEBUG', Array.prototype.slice.call(rest))
-//     console._debug.apply(this, rest)
-//   }
-// }
+  console._debug = console.debug
+  console.debug = function (...rest) {
+    log('DEBUG', Array.prototype.slice.call(rest))
+    console._debug.apply(this, rest)
+  }
+}
 
-// function htmlEncode(code) {
-//   // 1.首先动态创建一个容器标签元素，如DIV
-//   var temp = document.createElement('div')
-//   // 2.然后将要转换的字符串设置为这个元素的innerText或者textContent
-//   temp.textContent !== undefined
-//     ? (temp.textContent = code)
-//     : (temp.innerText = code)
-//   // 3.最后返回这个元素的innerHTML，即得到经过HTML编码转换的字符串了
-//   var output = temp.innerHTML
-//   temp = null
-//   return output
-// }
+function htmlEncode(code) {
+  // 1.首先动态创建一个容器标签元素，如DIV
+  var temp = document.createElement('div')
+  // 2.然后将要转换的字符串设置为这个元素的innerText或者textContent
+  temp.textContent !== undefined
+    ? (temp.textContent = code)
+    : (temp.innerText = code)
+  // 3.最后返回这个元素的innerHTML，即得到经过HTML编码转换的字符串了
+  var output = temp.innerHTML
+  temp = null
+  return output
+}
 
-// /**
-//  * @description: 日期格式化函数1
-//  * @param date 日期类型
-//  * @param format 日期格式  默认 yyyy-MM-dd HH:mm:ss格式
-//  */
-// function getNowFormatDate(date, format = 'yyyy-MM-dd HH:mm:ss') {
-//   const theCurrentDate = new Date(date.getTime()) // 转换日期格式
-//   const year = theCurrentDate.getFullYear().toString()
-//   format = format.replace('yyyy', year) // 替换年份
-//   const month = (theCurrentDate.getMonth() + 1).toString().padStart(2, '0')
-//   format = format.replace('MM', month) // 替换月份
-//   const day = theCurrentDate.getDate().toString().padStart(2, '0')
-//   format = format.replace('dd', day) // 替换天
-//   const hour = theCurrentDate.getHours().toString().padStart(2, '0')
-//   format = format.replace('HH', hour) // 替换小时
-//   const minutes = theCurrentDate.getMinutes().toString().padStart(2, '0')
-//   format = format.replace('mm', minutes) // 替换分钟
-//   const second = theCurrentDate.getSeconds().toString().padStart(2, '0')
-//   format = format.replace('ss', second) // 替换秒
-//   return format
-// }
+/**
+ * @description: 日期格式化函数1
+ * @param date 日期类型
+ * @param format 日期格式  默认 yyyy-MM-dd HH:mm:ss格式
+ */
+function getNowFormatDate(date, format = 'yyyy-MM-dd HH:mm:ss') {
+  const theCurrentDate = new Date(date.getTime()) // 转换日期格式
+  const year = theCurrentDate.getFullYear().toString()
+  format = format.replace('yyyy', year) // 替换年份
+  const month = (theCurrentDate.getMonth() + 1).toString().padStart(2, '0')
+  format = format.replace('MM', month) // 替换月份
+  const day = theCurrentDate.getDate().toString().padStart(2, '0')
+  format = format.replace('dd', day) // 替换天
+  const hour = theCurrentDate.getHours().toString().padStart(2, '0')
+  format = format.replace('HH', hour) // 替换小时
+  const minutes = theCurrentDate.getMinutes().toString().padStart(2, '0')
+  format = format.replace('mm', minutes) // 替换分钟
+  const second = theCurrentDate.getSeconds().toString().padStart(2, '0')
+  format = format.replace('ss', second) // 替换秒
+  return format
+}
 
 window.jconfirm.defaults = {
   title: 'Hello',
@@ -120,7 +120,6 @@ window.jconfirm.defaults = {
   backgroundDismiss: true,
   autoClose: false,
   closeIcon: null,
-  useBootstrap: !($('body').width() < 845),
   // columnClass: 'col-md-4 col-md-offset-8 col-xs-4 col-xs-offset-8',
   onOpen: function () {},
   onClose: function () {},
@@ -174,8 +173,8 @@ const actions = {
   C: false,
   A4: false,
   A5: false,
-  C4: false
-  // default: false
+  C4: false,
+  default: false
 }
 
 var calendarConfig = {
@@ -251,37 +250,27 @@ function formatDate(dateObj, formatType = 'yyyy-M-d') {
   if (/(y+)/.test(formatType)) {
     formatType = formatType.replace(
       RegExp.$1,
-      (dateObj.getFullYear() + '').substring(4 - RegExp.$1.length)
+      (dateObj.getFullYear() + '').substr(4 - RegExp.$1.length)
     )
   }
   for (var k in o) {
     if (new RegExp('(' + k + ')').test(formatType)) {
       formatType = formatType.replace(
         RegExp.$1,
-        RegExp.$1.length == 1
-          ? o[k]
-          : ('00' + o[k]).substring(('' + o[k]).length)
+        RegExp.$1.length == 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length)
       )
     }
   }
   return formatType
 }
 
-String.prototype.replaceAt = function (index, replacement) {
-  return (
-    this.substring(0, index) +
-    replacement +
-    this.substring(index + replacement.length)
-  )
-}
-
 $(document).ready(function () {
-  // configureLogging(document.querySelector('.logs'))
-  // var feMonitor = new FeMonitor({
-  //   isOpenError: true,
-  //   isOpenPerformance: false
-  // })
-  // feMonitor.init()
+  configureLogging(document.querySelector('.logs'))
+  var feMonitor = new FeMonitor({
+    isOpenError: true,
+    isOpenPerformance: false
+  })
+  feMonitor.init()
   createCalendar(calendarConfig)
   var curUserName = localStorage.getItem('username')
   if (
@@ -292,19 +281,6 @@ $(document).ready(function () {
   ) {
     curUserName = 'XXX'
     localStorage.setItem('username', 'XXX')
-  }
-
-  for (const key in actions) {
-    $('.w-' + String(key)).click(() => {
-      for (const _key in actions) {
-        if (_key === key) {
-          myToast.normal('info', `正在标记${_key}！`, 1500)
-          actions[key] = true
-        } else {
-          actions[_key] = false
-        }
-      }
-    })
   }
 
   $('.cal-title>.cal-text').after(
@@ -327,11 +303,11 @@ $(document).ready(function () {
     var curUserName = localStorage.getItem('username')
     if (curUserName && curUserName.length) {
       var a = $.confirm({
-        title: '你将要重新填写！',
-        content: `你已填写过名字，你确定要修改吗？`,
+        title: 'Are you sure?',
+        content: `You won't be able to revert this!`,
         buttons: {
           deleteBtn: {
-            text: '确定',
+            text: 'Yes, change it!',
             btnClass: 'btn-red',
             action: function () {
               localStorage.setItem('username', '')
@@ -340,11 +316,8 @@ $(document).ready(function () {
               openInputAlert()
             }
           },
-          cancel: {
-            text: '取消',
-            action: function () {
-              a.close()
-            }
+          cancel: function () {
+            a.close()
           }
         }
       })
@@ -354,8 +327,8 @@ $(document).ready(function () {
 
     function openInputAlert() {
       var bConfirm = $.confirm({
-        title: '填写一下你的英文名吧!',
-        content: `<form action="" class="formName"><div class="form-group"><label>你的英文名：</label><input type="text" placeholder="Your name" class="name form-control" required /></div></form>`,
+        title: 'Please submit your name!',
+        content: `<form action="" class="formName"><div class="form-group"><label>Please submit your name!</label><input type="text" placeholder="Your name" class="name form-control" required /></div></form>`,
         buttons: {
           formSubmit: {
             text: 'Submit',
@@ -363,11 +336,11 @@ $(document).ready(function () {
             action: function () {
               var name = this.$content.find('.name').val()
               if (!name) {
-                myToast.normal('error', '你需要写点什么！', 2500)
+                myToast.normal('error', 'You need to write something!', 1500)
                 return false
               }
               if (!/^[A-Za-z]*(\s[A-Za-z]*)*$/.test(name.trim())) {
-                myToast.normal('error', '请再次检查输入的是否为英文名', 2500)
+                myToast.normal('error', 'Please Check it again!', 1500)
                 return false
               }
               var curSaveUsername = name
@@ -377,8 +350,8 @@ $(document).ready(function () {
               bConfirm = null
               myToast.normal(
                 'success',
-                `<p>保存成功！以后将会自动读取！</p>\n<h4>Hello, ${curSaveUsername}!</h4>`,
-                3000
+                `Submit Successfully！\n<h4>Hello, ${curSaveUsername}!</h4>`,
+                1500
               )
             }
           },
@@ -400,15 +373,18 @@ $(document).ready(function () {
     }
   })
 
-  $('.w-clear').click(() => {
-    for (const key in actions) {
-      var curClassName = '.workHour-' + String(key)
-      console.log('$(curClassName).length: ', $(curClassName).length)
-      $(curClassName).length &&
-        $(curClassName).removeClass(curClassName.replace('.', ''))
-      myToast.normal('success', '已清除所有标记！', 1500)
-    }
-  })
+  for (const key in actions) {
+    $('.w-' + String(key)).click(() => {
+      for (const _key in actions) {
+        if (_key === key) {
+          myToast.normal('info', `正在标记${_key}！`, 1500)
+          actions[key] = true
+        } else {
+          actions[_key] = false
+        }
+      }
+    })
+  }
 
   // 根据容器ID来渲染行内样式，避免长时间卡顿
   function translateStyle(contentId) {
@@ -469,25 +445,7 @@ $(document).ready(function () {
     canvas.height = height
     canvas.getContext('2d').scale(scale, scale)
 
-    var curAllMarkStr = ''
-    var curIdx = 1
-    for (const key in actions) {
-      curAllMarkStr += $('.workHour-' + key).length
-        ? ` ${key} 有 ${$('.workHour-' + key).length} 个${
-            !(+curIdx % 2) ? ';<br>' : ';'
-          }`
-        : ''
-      curIdx++
-    }
-    console.log('curMarkArr: ', curAllMarkStr)
-    var _curAllMarkStr = curAllMarkStr.length
-      ? curAllMarkStr.replaceAt(curAllMarkStr.length - 1, '！')
-      : '暂未标记！'
-    myToast.normal(
-      'info',
-      `<p>稍等片刻，截图正在生成！</p>当前${_curAllMarkStr}`,
-      4000
-    )
+    myToast.normal('info', 'Sit back, we are processing your request!', 3000)
     await sleep(3000)
 
     var canvas1 = await html2canvas(shareContent, {
@@ -508,7 +466,7 @@ $(document).ready(function () {
         height: (height * scale) / (scale < 2 ? 1 : 2) + 'px'
       }
       var aConfirm = $.confirm({
-        title: '截图预览',
+        title: 'Screenshot preview',
         content: `<div class="canvasContainer">
             <div id="imgcanvas"><img src="${img.src}" style="opacity:1;z-index:9999;" alt="截图"/></div>
           </div>`,
